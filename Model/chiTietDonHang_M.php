@@ -28,7 +28,6 @@
        {
           $connect = new DateBase;
           $connect = $connect->connnection();
-
           $query = "INSERT INTO chitietdonhang VALUE(" .
           "'" . $chiTietDonHang[ 'MaDonHang' ] . "'," .
           "'" . $chiTietDonHang[ 'MaSanPham' ] . "'," .

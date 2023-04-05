@@ -15,20 +15,6 @@
 				}
 				return( $cacthuonghieu);
 		}
-		function getAllNB(){
-			$a = new DateBase;
-			$con=$a->connnection();
-			$sql = "select * from thuonghieu where TrangThai=0";
-            $rs = mysqli_query($con,$sql);
-            while ($row=mysqli_fetch_array($rs)){
-				$MaThuongHieu  = $row['MaThuongHieu'];
-				$TenThuongHieu=$row['TenThuongHieu'];
-				$TrangThai=$row['TrangThai'];
-				$thuonghieu=['MaThuongHieu' => $MaThuongHieu, 'TenThuongHieu' => $TenThuongHieu , 'TrangThai' => $TrangThai  ];
-					$cacthuonghieu[] = $thuonghieu;
-				}
-				return( $cacthuonghieu);
-		}
 		function thuonghieutheoID($math){
 			include ('connection.php');
 			$a=new DateBase;
@@ -48,16 +34,7 @@
 			$con=$a->connnection();
 			$sql="update thuonghieu set TrangThai='0' where MaThuongHieu='".$math."'";
 			mysqli_query($con,$sql);
-			echo "<script>alert('Bạn đã xóa thương hiệu khỏi hệ thống');window.location='trademark.php';
-				</script>";
-		}
-		function unlockTH($math){
-			$a=new DateBase;
-			$con=$a->connnection();
-			$sql="update thuonghieu set TrangThai='1' where MaThuongHieu='".$math."'";
-			mysqli_query($con,$sql);
-			echo "<script>alert('Bạn đã khôi phục thương hiệu trên hệ thống');window.location='trademark.php';
-				</script>";
+			header('location:trademark.php');
 		}
 		function updateTH($math,$tenth){
 			$a=new DateBase;

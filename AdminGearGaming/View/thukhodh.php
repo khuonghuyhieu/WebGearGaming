@@ -53,9 +53,10 @@ $order = new order_c;
                                         <label>
                                             <div class="form-group">
                                                 <select name="filter-tinhTrang" class="form-control">
-                                                    <option value="1">Tất cả đơn hàng</option>
-                                                    <option value="2">Đã xử lý</option>
-                                                    <option value="3">Chưa xử lý</option>
+                                                    <option value="1">Choose...</option>
+                                                    <option value="3">Đã xử lý</option>
+                                                    <option value="4">Đang giao hàng</option>
+                                                    <option value="5">Đã giao hàng</option>
                                                 </select>
                                             </div>
                                         </label>
@@ -106,112 +107,44 @@ $order = new order_c;
                                             if (isset($_POST['btn-search'])) {
                                                 $search = $_REQUEST['search'];
                                                 foreach ($order->search_order($search) as $list_search) {
+                                                    if ($list_order['TinhTrang'] == 1 || $list_order['TinhTrang'] == 2 || $list_order['TinhTrang'] == 3) {
                                             ?>
-                                                    <tr>
-                                                        <td><?= $list_search['MaDonHang'] ?></td>
-                                                        <td><?= $list_search['MaTaiKhoan'] ?></td>
-                                                        <td><?= $list_search['NgayMua'] ?></td>
-                                                        <td><?= number_format($list_search['TongTien'], 0, ',', ',') ?>VNĐ</td>
-                                                        <td>
-                                                            <?php if ($list_search['TinhTrang'] == 0) {
-                                                            ?>
-                                                                <span style="color: red">Chưa xử lý</span>
-                                                            <?php
-                                                            } else if ($list_search['TinhTrang'] == 1) {
-                                                            ?>
-                                                                <span style="color: green">Đã Xử lý</span>
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td><?= $list_search['HoTen'] ?></td>
-                                                        <td><?= $list_search['Email'] ?></td>
-                                                        <td><?= $list_search['Phone'] ?></td>
-                                                        <td><?= $list_search['DiaChi'] ?></td>
-                                                        <td><?= $list_search['TinhThanh'] ?></td>
-                                                        <td><?= $list_search['QuanHuyen'] ?></td>
-                                                        <td>
-                                                            <form action="detail-orderthukho.php?id_order=<?= $list_search['MaDonHang'] ?>" method="post">
-                                                                <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
-                                                            </form>
-                                                        </td>
-                                                        <td>
-                                                            <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                <form action="update-orderthukho.php?id_order=<?= $list_search['MaDonHang'] ?>&tinhtrang=<?= $list_search['TinhTrang'] ?>" method="post">
-                                                                    <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php
-                                                }
-                                            } else if (isset($_GET['filter-tinhTrang']) == 0 || $_GET['filter-tinhTrang'] == 1) {
-                                                foreach ($order->getAll() as $list_order) {
-                                                ?>
-                                                    <tr>
-                                                        <td><?= $list_order['MaDonHang'] ?></td>
-                                                        <td><?= $list_order['MaTaiKhoan'] ?></td>
-                                                        <td><?= $list_order['NgayMua'] ?></td>
-                                                        <td><?= number_format($list_order['TongTien'], 0, ',', ',') ?>VNĐ</td>
-                                                        <td>
-                                                            <?php if ($list_order['TinhTrang'] == 0) {
-                                                            ?>
-                                                                <span style="color: red">Chưa xử lý</span>
-                                                            <?php
-                                                            } else if ($list_order['TinhTrang'] == 1) {
-                                                            ?>
-                                                                <span style="color: green">Đã Xử lý</span>
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td><?= $list_order['HoTen'] ?></td>
-                                                        <td><?= $list_order['Email'] ?></td>
-                                                        <td><?= $list_order['Phone'] ?></td>
-                                                        <td><?= $list_order['DiaChi'] ?></td>
-                                                        <td><?= $list_order['TinhThanh'] ?></td>
-                                                        <td><?= $list_order['QuanHuyen'] ?></td>
-                                                        <td>
-                                                            <form action="detail-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
-                                                                <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
-                                                            </form>
-                                                        </td>
-                                                        <td>
-                                                            <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                <form action="update-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
-                                                                    <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
-                                                }
-                                            } else if ($_GET['filter-tinhTrang'] == 2) {
-                                                foreach ($order->getAll() as $list_order) {
-                                                    if ($list_order['TinhTrang'] == 1) {
-                                                    ?>
                                                         <tr>
-                                                            <td><?= $list_order['MaDonHang'] ?></td>
-                                                            <td><?= $list_order['MaTaiKhoan'] ?></td>
-                                                            <td><?= $list_order['NgayMua'] ?></td>
-                                                            <td><?= number_format($list_order['TongTien'], 0, ',', ',') ?>VNĐ</td>
+                                                            <td><?= $list_search['MaDonHang'] ?></td>
+                                                            <td><?= $list_search['MaTaiKhoan'] ?></td>
+                                                            <td><?= $list_search['NgayMua'] ?></td>
+                                                            <td><?= number_format($list_search['TongTien'], 0) ?> VNĐ</td>
                                                             <td>
-                                                                <span style="color: green">Đã Xử lý</span>
+                                                                <?php
+                                                                if ($list_order['TinhTrang'] == 1) {
+                                                                ?>
+                                                                    <span style="color: green">Đã Xử lý</span>
+                                                                <?php
+                                                                } else if ($list_order['TinhTrang'] == 2) {
+                                                                ?>
+                                                                    <span style="color: yellow">Đang giao hàng</span>
+                                                                <?php
+                                                                } else if ($list_order['TinhTrang'] == 3) {
+                                                                ?>
+                                                                    <span style="color: green">Đã giao hàng</span>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </td>
-                                                            <td><?= $list_order['HoTen'] ?></td>
-                                                            <td><?= $list_order['Email'] ?></td>
-                                                            <td><?= $list_order['Phone'] ?></td>
-                                                            <td><?= $list_order['DiaChi'] ?></td>
-                                                            <td><?= $list_order['TinhThanh'] ?></td>
-                                                            <td><?= $list_order['QuanHuyen'] ?></td>
+                                                            <td><?= $list_search['HoTen'] ?></td>
+                                                            <td><?= $list_search['Email'] ?></td>
+                                                            <td><?= $list_search['Phone'] ?></td>
+                                                            <td><?= $list_search['DiaChi'] ?></td>
+                                                            <td><?= $list_search['TinhThanh'] ?></td>
+                                                            <td><?= $list_search['QuanHuyen'] ?></td>
                                                             <td>
-                                                                <form action="detail-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
+                                                                <form action="detail-order.php?id_order=<?= $list_search['MaDonHang'] ?>" method="post">
                                                                     <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
                                                                 </form>
                                                             </td>
                                                             <td>
                                                                 <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                    <form action="update-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                    <form action="update-order.php?id_order=<?= $list_search['MaDonHang'] ?>&tinhtrang=<?= $list_search['TinhTrang'] ?>" method="post">
                                                                         <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
                                                                     </form>
                                                                 </div>
@@ -220,17 +153,31 @@ $order = new order_c;
                                                     <?php
                                                     }
                                                 }
-                                            } else if ($_GET['filter-tinhTrang'] == 3) {
+                                            } else if (isset($_GET['filter-tinhTrang']) == 0 || $_GET['filter-tinhTrang'] == 1) {
                                                 foreach ($order->getAll() as $list_order) {
-                                                    if ($list_order['TinhTrang'] == 0) {
-                                                    ?>
+                                                    if ($list_order['TinhTrang'] == 1 || $list_order['TinhTrang'] == 2 || $list_order['TinhTrang'] == 3) {
+                                                ?>
                                                         <tr>
                                                             <td><?= $list_order['MaDonHang'] ?></td>
                                                             <td><?= $list_order['MaTaiKhoan'] ?></td>
                                                             <td><?= $list_order['NgayMua'] ?></td>
-                                                            <td><?= number_format($list_order['TongTien'], 0, ',', ',') ?>VNĐ</td>
+                                                            <td><?= number_format($list_order['TongTien'], 0) ?> VNĐ</td>
                                                             <td>
-                                                                <span style="color: red">Chưa Xử lý</span>
+                                                                <?php
+                                                                if ($list_order['TinhTrang'] == 1) {
+                                                                ?>
+                                                                    <span style="color: green">Đã Xử lý</span>
+                                                                <?php
+                                                                } else if ($list_order['TinhTrang'] == 2) {
+                                                                ?>
+                                                                    <span style="color: yellow">Đang giao hàng</span>
+                                                                <?php
+                                                                } else if ($list_order['TinhTrang'] == 3) {
+                                                                ?>
+                                                                    <span style="color: green">Đã giao hàng</span>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </td>
                                                             <td><?= $list_order['HoTen'] ?></td>
                                                             <td><?= $list_order['Email'] ?></td>
@@ -239,16 +186,129 @@ $order = new order_c;
                                                             <td><?= $list_order['TinhThanh'] ?></td>
                                                             <td><?= $list_order['QuanHuyen'] ?></td>
                                                             <td>
-                                                                <form action="detail-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
+                                                                <form action="detail-order.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
                                                                     <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
                                                                 </form>
                                                             </td>
                                                             <td>
                                                                 <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                    <form action="update-orderthukho.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                    <?php if ($list_order['TinhTrang'] == 1) {
+                                                                        ?>
+                                                                        <form action="update-order-12.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                            <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                                        </form>
+                                                                        <?php
+                                                                        }else if ($list_order['TinhTrang'] == 2) {
+                                                                        ?>
+                                                                        <form action="update-order-23.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                            <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                                        </form>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['filter-tinhTrang'] == 3) {
+                                                foreach ($order->getAll() as $list_order) {
+                                                    if ($list_order['TinhTrang'] == 1) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $list_order['MaDonHang'] ?></td>
+                                                            <td><?= $list_order['MaTaiKhoan'] ?></td>
+                                                            <td><?= $list_order['NgayMua'] ?></td>
+                                                            <td><?= number_format($list_order['TongTien'], 0) ?> VNĐ</td>
+                                                            <td>
+                                                                <span style="color: green">Đã xử lý</span>
+                                                            </td>
+                                                            <td><?= $list_order['HoTen'] ?></td>
+                                                            <td><?= $list_order['Email'] ?></td>
+                                                            <td><?= $list_order['Phone'] ?></td>
+                                                            <td><?= $list_order['DiaChi'] ?></td>
+                                                            <td><?= $list_order['TinhThanh'] ?></td>
+                                                            <td><?= $list_order['QuanHuyen'] ?></td>
+                                                            <td>
+                                                                <form action="detail-order.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
+                                                                    <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <div class="rf" style="display: flex; justify-content: space-around;">
+                                                                    <form action="update-order-12.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
                                                                         <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
                                                                     </form>
                                                                 </div>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['filter-tinhTrang'] == 4) {
+                                                foreach ($order->getAll() as $list_order) {
+                                                    if ($list_order['TinhTrang'] == 2) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $list_order['MaDonHang'] ?></td>
+                                                            <td><?= $list_order['MaTaiKhoan'] ?></td>
+                                                            <td><?= $list_order['NgayMua'] ?></td>
+                                                            <td><?= number_format($list_order['TongTien'], 0) ?> VNĐ</td>
+                                                            <td>
+                                                                <span style="color: yellow;">Đang giao hàng</span>
+                                                            </td>
+                                                            <td><?= $list_order['HoTen'] ?></td>
+                                                            <td><?= $list_order['Email'] ?></td>
+                                                            <td><?= $list_order['Phone'] ?></td>
+                                                            <td><?= $list_order['DiaChi'] ?></td>
+                                                            <td><?= $list_order['TinhThanh'] ?></td>
+                                                            <td><?= $list_order['QuanHuyen'] ?></td>
+                                                            <td>
+                                                                <form action="detail-order.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
+                                                                    <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <div class="rf" style="display: flex; justify-content: space-around;">
+                                                                    <form action="update-order-23.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                        <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['filter-tinhTrang'] == 5) {
+                                                foreach ($order->getAll() as $list_order) {
+                                                    if ($list_order['TinhTrang'] == 3) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $list_order['MaDonHang'] ?></td>
+                                                            <td><?= $list_order['MaTaiKhoan'] ?></td>
+                                                            <td><?= $list_order['NgayMua'] ?></td>
+                                                            <td><?= number_format($list_order['TongTien'], 0) ?> VNĐ</td>
+                                                            <td>
+                                                                <span style="color: green">Đã giao hàng</span>
+                                                            </td>
+                                                            <td><?= $list_order['HoTen'] ?></td>
+                                                            <td><?= $list_order['Email'] ?></td>
+                                                            <td><?= $list_order['Phone'] ?></td>
+                                                            <td><?= $list_order['DiaChi'] ?></td>
+                                                            <td><?= $list_order['TinhThanh'] ?></td>
+                                                            <td><?= $list_order['QuanHuyen'] ?></td>
+                                                            <td>
+                                                                <form action="detail-order.php?id_order=<?= $list_order['MaDonHang'] ?>" method="post">
+                                                                    <button type="submit" name="submitDetail" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <!-- <div class="rf" style="display: flex; justify-content: space-around;">
+                                                                    <form action="update-order.php?id_order=<?= $list_order['MaDonHang'] ?>&tinhtrang=<?= $list_order['TinhTrang'] ?>" method="post">
+                                                                        <button type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                                    </form>
+                                                                </div> -->
                                                             </td>
                                                         </tr>
                                             <?php

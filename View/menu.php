@@ -28,13 +28,13 @@
                                             <div class="login"><a href="../login-register/account.php"><span class="hidden-xs">'.$_SESSION['Holot'].' '.$_SESSION['Ten'].'</span></a></div>
                                             <div class="login"><a href="../login-register/logout.php"><span class="hidden-xs">Đăng Xuất</span></a></div>';
                                         }
-                                        if($_SESSION['Quyen']=='2'){
-                                            echo '<div class="login"><a href="../../AdminGearGaming/View/thukhodh.php"><span class="hidden-xs">Quản lý</span></a></div>
+                                        else if($_SESSION['Quyen']=='1'){
+                                            echo '<div class="login"><a href="../../AdminGearGaming/View/index.php"><span class="hidden-xs">Quản lý</span></a></div>
                                             <div class="login"><a href="../history/history.php"><span class="hidden-xs">Xem Lịch Sử</span></a></div>
                                             <div class="login"><a href="../login-register/logout.php"><span class="hidden-xs">Đăng Xuất</span></a></div>';
                                         }
-                                        else if($_SESSION['Quyen']=='1'){
-                                            echo '<div class="login"><a href="../../AdminGearGaming/View/index.php"><span class="hidden-xs">Quản lý</span></a></div>
+                                        else if($_SESSION['Quyen']=='2'){
+                                            echo '<div class="login"><a href="../../AdminGearGaming/View/thukhoindex.php"><span class="hidden-xs">Quản lý</span></a></div>
                                             <div class="login"><a href="../history/history.php"><span class="hidden-xs">Xem Lịch Sử</span></a></div>
                                             <div class="login"><a href="../login-register/logout.php"><span class="hidden-xs">Đăng Xuất</span></a></div>';
                                         }

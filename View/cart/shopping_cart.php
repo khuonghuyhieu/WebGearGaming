@@ -60,7 +60,6 @@ $cartController = new Cart_C();
                       <tr class="first last">
                         <button class="button btn-update" title="Update Cart" value="update_qty" name="updateCart" type="submit"><span>Update Cart</span></button>
                         <button id="empty_cart_button" class="button" title="Clear Cart" name="clearCart" type="submit"><span>Clear Cart</span></button>
-                        </td>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -74,9 +73,9 @@ $cartController = new Cart_C();
                             <td>
                               <h2 class="product-name"> <a href="../sanpham/Chitietsp.php?SP=<?= $item['ProductID'] ?>"><?= $item['ProductName'] ?></a> </h2>
                             </td>
-                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"><?= number_format($item['Price'], 0, ',', ',') ?></span> </span></td>
+                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"><?= number_format($item['Price'], 0).' VNĐ' ?></span> </span></td>
                             <td class="a-center movewishlist"><input name="slCart[<?= $item['ProductID'] ?>]" type="number" min=1 maxlength="12" class="input-text qty" title="Qty" size="4" value="<?= $item['Quantity'] ?>"></td>
-                            <td class="a-center movewishlist"><span class="cart-price"> <span class="price"><?= number_format($item['Price'] * $item['Quantity'], 0, ',', ',') ?></span> </span></td>
+                            <td class="a-center movewishlist"><span class="cart-price"> <span class="price"><?= number_format($item['Price'] * $item['Quantity'], 0).' VNĐ' ?></span> </span></td>
                             <td class="a-center last"><a class="btn" href="shopping_cart.php?action=deleteProduct&idProduct=<?= $item['ProductID'] ?>">Xóa</a></td>
                           </tr>
                           <input type="text" name="idProduct" value="<?= $item['ProductID'] ?>" hidden>
@@ -102,19 +101,20 @@ $cartController = new Cart_C();
                           <tfoot>
                             <tr>
                               <td colspan="1" class="a-left"><strong>Tổng Tiền</strong></td>
-                              <td class="a-right"><strong><span class="price"><?= number_format($tongTienGioHang, 0, ',', ',') ?></span></strong></td>
+                              <td class="a-right"><strong><span class="price"><?= number_format($tongTienGioHang, 0).' VNĐ' ?></span></strong></td>
                             </tr>
                           </tfoot>
                           <tfoot>
                             <tr>
                               <td colspan="1" class="a-left">Giảm giá</td>
-                              <td class="a-right"><strong><span class="price">0</span></strong></td>
+                              <td class="a-right"><strong><span class="price">0 VNĐ</span></strong></td>
                             </tr>
                           </tfoot>
                         </table>
                         <ul class="checkout">
                           <li>
                             <a class="btn btn-proceed-checkout" title="Proceed to Checkout" type="button" href="check-out.php"><span>Thanh Toán</span></a>
+                            <a target="_blank" href="../../AdminGearGaming/pdf/incart.php?in_cart" title="Remove item"><button class="button"><span>IN CART</span></button></a>
                           </li>
                         </ul>
                       </div>

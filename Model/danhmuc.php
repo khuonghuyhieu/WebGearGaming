@@ -15,20 +15,6 @@
 				}
 				return($cacdanhmuc);
 		}
-		function getAllNB(){
-			$a = new DateBase;
-			$con=$a->connnection();
-			$sql = "select * from danhmuc where TrangThai = 0";
-            $rs = mysqli_query($con,$sql);
-            while ($row=mysqli_fetch_array($rs)){
-				$MaDanhMuc  = $row['MaDanhMuc'];
-				$TenDanhMuc=$row['TenDanhMuc'];
-				$TrangThai=$row['TrangThai'];
-				$danhmuc=['MaDanhMuc' => $MaDanhMuc, 'TenDanhMuc' => $TenDanhMuc , 'TrangThai' => $TrangThai ];
-				$cacdanhmuc[]=$danhmuc;
-				}
-				return($cacdanhmuc);
-		}
 		function danhmuctheoID($madm){
 			include ('connection.php');
 			$a=new DateBase;
@@ -48,16 +34,7 @@
 			$con=$a->connnection();
 			$sql="update danhmuc set TrangThai='0' where MaDanhMuc='".$madm."'";
 			mysqli_query($con,$sql);
-			echo "<script>alert('Bạn đã xóa danh mục khỏi hệ thống');window.location='category.php';
-				</script>";
-		}
-		function unlockDM($madm){
-			$a=new DateBase;
-			$con=$a->connnection();
-			$sql="update danhmuc set TrangThai='1' where MaDanhMuc='".$madm."'";
-			mysqli_query($con,$sql);
-			echo "<script>alert('Bạn đã khôi phục thương hiệu thành công');window.location='category.php';
-				</script>";
+			header('location:category.php');
 		}
 		function updateDM($madm,$tendm){
 			$a=new DateBase;

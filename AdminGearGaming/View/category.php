@@ -46,18 +46,7 @@
                         <div class="bootstrap-table">
                             <div class="fixed-table-toolbar">
                                 <div class="btn pull-left">
-                                    <form method="get">
-                                        <a class="btn btn-default" href="insert-trademark.php"><i class="glyphicon glyphicon-plus-sign" style="margin-top: 1px"></i> Thêm</a>
-                                        <label>
-                                            <div class="form-group">
-                                                <select class="form-control" name='tinhtrang' id='tinhtrang'>
-                                                    <option value='db'>Danh mục đang bán</option>
-                                                    <option value='nb'>Danh mục ngừng bán</option>
-                                                </select>
-                                            </div>
-                                        </label>
-                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> <b>Lọc</b></button>
-                                </form>
+                                    <a class="btn btn-default" href="insert-category.php"><i class="glyphicon glyphicon-plus-sign" style="margin-top: 1px"></i> Thêm</a>
                                 </div>
                                 <div class="pull-right search">
                                     <input class="form-control" type="text" placeholder="Tìm kiếm">
@@ -81,48 +70,24 @@
                                         <form method="get">
                                         <tbody>
                                             <?php
-                                                $tinhtrang=$_GET['tinhtrang'];
                                                 include('../../Model/connection.php');
                                                 include('../../Controller/danhmuc.php');
                                                 $p=new danhmuc_controller;
-                                                if(empty($tinhtrang) || $tinhtrang=='db'){
-                                                    foreach($p->getAll() as $danhmuc){
-                                                        if($danhmuc['TrangThai']=='1'){
-                                                            echo'<tr>
-                                                                <td class="bs-checkbox">
-                                                                    <input type="checkbox">
-                                                                </td>
-                                                                <td>'.$danhmuc['MaDanhMuc'].'</td>
-                                                                <td>'.$danhmuc['TenDanhMuc'].'</td>
-                                                                <td>
-                                                                    <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                        <a href="category.php?MaDanhMuc='.$danhmuc['MaDanhMuc'].'"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                        <a href="update-category.php?MaDanhMuc='.$danhmuc['MaDanhMuc'].'"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                    </div>
+                                                foreach($p->getAll() as $danhmuc){
+                                                    echo'<tr>
+                                                        <td class="bs-checkbox">
+                                                            <input type="checkbox">
+                                                        </td>
+                                                        <td>'.$danhmuc['MaDanhMuc'].'</td>
+                                                        <td>'.$danhmuc['TenDanhMuc'].'</td>
+                                                        <td>
+                                                            <div class="rf" style="display: flex; justify-content: space-around;">
+                                                                <a href="category.php?MaDanhMuc='.$danhmuc['MaDanhMuc'].'"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                <a href="update-category.php?MaDanhMuc='.$danhmuc['MaDanhMuc'].'"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                            </div>
 
-                                                                </td>
-                                                            </tr>';
-                                                        }
-                                                    }
-                                                }
-                                                else if($tinhtrang=='nb'){
-                                                    foreach($p->getAllNB() as $danhmuc){
-                                                        if($danhmuc['TrangThai']=='0'){
-                                                            echo'<tr>
-                                                                <td class="bs-checkbox">
-                                                                    <input type="checkbox">
-                                                                </td>
-                                                                <td>'.$danhmuc['MaDanhMuc'].'</td>
-                                                                <td>'.$danhmuc['TenDanhMuc'].'</td>
-                                                                <td>
-                                                                    <div class="rf" style="display: flex; justify-content: space-around;">
-                                                                        <a href="category.php?MaDanhMucXoa='.$danhmuc['MaDanhMuc'].'"><i class="glyphicon glyphicon-repeat"></i></a>
-                                                                    </div>
-
-                                                                </td>
-                                                            </tr>';
-                                                        }
-                                                    }
+                                                        </td>
+                                                    </tr>';
                                                 }
                                             ?>
                                         </tbody>
@@ -138,15 +103,9 @@
         </div>
         <?php
             $madanhmuc=$_GET['MaDanhMuc'];
-            $madanhmucxoa=$_GET['MaDanhMucXoa'];
             if(isset($madanhmuc)){
                 $p->lockDM($madanhmuc);
                 echo "<script>alert('Bạn đã xóa danh mục khỏi hệ thống');
-                </script>";
-            }
-            else if(isset($madanhmucxoa)){
-                $p->unlockDM($madanhmucxoa);
-                echo "<script>alert('Bạn đã khôi phục danh mục thành công');
                 </script>";
             }
         ?>

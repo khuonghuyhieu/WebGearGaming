@@ -6,11 +6,6 @@
 			$p = new thuonghieu;
 			return $p->getAll();
 		}
-		function getAllNB(){
-			include ("../../Model/thuonghieu.php");
-			$p = new thuonghieu;
-			return $p->getAllNB();
-		}
 		function thuonghieuID($math){
 			include ("../../Model/thuonghieu.php");
 			$p=new thuonghieu;
@@ -20,10 +15,7 @@
 		function lockTH($math){
 			$p=new thuonghieu;
 			$p->lockTH($math);
-		}
-		function unlockTH($math){
-			$p=new thuonghieu;
-			$p->unlockTH($math);
+			header('location:trademark.php');
 		}
 		function updateTH($math,$tenth){
 			$p=new thuonghieu;

@@ -21,8 +21,12 @@
         public function maDonHangMoiNhat()
         {
             $donHangModel = new DonHang_M;
-
             return $donHangModel->maDonHangMoiNhat();
+        }
+        public function deleteDH($madonhang)
+        {
+            $donHangModel = new DonHang_M;
+            return $donHangModel->deleteDH($madonhang);
         }
     }
 ?>

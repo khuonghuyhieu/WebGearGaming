@@ -97,7 +97,7 @@ if (!isset($_SESSION['MaTaiKhoan'])) {
                                         <h2 class="product-name"> <a href="../../View/sanpham/Chitietsp.php?SP=<?= $item['ProductID'] ?>"><?= $item['ProductName'] ?></a> </h2>
                                     </td>
                                     <td class="a-center hidden-table"><span class="cart-price"> <span class="price"><?= $item['Quantity'] ?></span></span></td>
-                                    <td class="a-center hidden-table"><span class="cart-price"> <span class="price"><?= number_format($item['Price'], 0, ',', ',') ?></span> </span></td>
+                                    <td class="a-center hidden-table"><span class="cart-price"> <span class="price"><?= number_format($item['Price'], 0). ' VNĐ' ?></span> </span></td>
                                 </tr>
 
                         <?php
@@ -118,7 +118,7 @@ if (!isset($_SESSION['MaTaiKhoan'])) {
                             </td>
                             <td class="a-center hidden-table">
                                 <h2 class="cart-price">
-                                    <h2 class="price"><?= number_format($cart_c->tongTienGioHang(), 0, ',', ',') ?> </h2>
+                                    <h2 class="price"> <?= number_format($cart_c->tongTienGioHang(), 0).' VNĐ' ?> </h2>
                                 </h2>
                             </td>
                         </tr>

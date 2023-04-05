@@ -3,6 +3,9 @@
         <img src="../../images/LogoGearjpg__2_-removebg-preview.png" alt="">
     </div>
     <ul class="nav menu">
+        <li><a href="thukhoindex.php"><svg class="glyph stroked desktop">
+                    <use xlink:href="#stroked-desktop" />
+                </svg> Quản lý sản phẩm</a></li>
         <li><a href="thukhodh.php"><svg class="glyph stroked bag">
                     <use xlink:href="#stroked-bag"></use>
                 </svg> Quản lý đơn hàng</a></li>

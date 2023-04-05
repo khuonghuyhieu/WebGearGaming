@@ -19,8 +19,6 @@ class taikhoan
 						$_SESSION['MaTaiKhoan'] = $row['MaTaiKhoan'];
 						$_SESSION['Holot'] = $row['HoLot'];
 						$_SESSION['Ten'] = $row['Ten'];
-						$_SESSION['Email'] = $row['Email'];
-						$_SESSION['Phone'] = $row['Phone'];
 						$_SESSION['Quyen'] = $row['Quyen'];
 						header('location: ../../AdminGearGaming/View/index.php');
 					} else if ($row['Quyen'] == '2') {
@@ -28,10 +26,8 @@ class taikhoan
 						$_SESSION['MaTaiKhoan'] = $row['MaTaiKhoan'];
 						$_SESSION['Holot'] = $row['HoLot'];
 						$_SESSION['Ten'] = $row['Ten'];
-						$_SESSION['Email'] = $row['Email'];
-						$_SESSION['Phone'] = $row['Phone'];
 						$_SESSION['Quyen'] = $row['Quyen'];
-						header('location: ../../AdminGearGaming/View/thukhodh.php');
+						header('location: ../../AdminGearGaming/View/thukhoindex.php');
 					} else {
 						session_start();
 						$_SESSION['MaTaiKhoan'] = $row['MaTaiKhoan'];
@@ -71,7 +67,7 @@ class taikhoan
 		} else if ($row_Phone != 0) {
 			echo '<script>alert("Số điện thoại đã được đăng ký. Vui lòng nhập lại số điện thoại")</script>';
 		} else {
-			$sql = "insert into taikhoan(HoLot,Ten,Email,Phone,MatKhau,KichHoat,Quyen) values('" . $holot . "','" . $ten . "','" . $email . "','" . $phone . "','" . $pass . "','1','0')";
+			$sql = "insert into taikhoan(HoLot,Ten,Email,Phone,MatKhau,KichHoat,Quyen) values('" . $holot . "','" . $ten . "','" . $email . "','" . $phone . "','" . $pass . "','0','0')";
 			mysqli_query($con, $sql);
 			echo "<script>alert('Vui lòng đăng nhập vào Gmail để xác thực tài khoản');window.location='login.php';
 				</script>";

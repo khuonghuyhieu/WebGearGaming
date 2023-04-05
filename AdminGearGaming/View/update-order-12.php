@@ -32,7 +32,10 @@ $option = $_GET['tinhtrang'];
     ?>
 
     <?php
-    include('navthukho.php')
+    if($_SESSION['Quyen']=='1')
+        include('nav.php');
+    if($_SESSION['Quyen']=='2')
+        include('navthukho.php');
     ?>
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -54,11 +57,11 @@ $option = $_GET['tinhtrang'];
                                                                 echo 'selected';
                                                             }
                                                             ?>>Đã xử lý</option>
-                                        <option value="0" <?php
-                                                            if ($option == 0) {
+                                        <option value="2" <?php
+                                                            if ($option == 2) {
                                                                 echo 'selected';
                                                             }
-                                                            ?>>Chưa xử lý</option>
+                                                            ?>>Đang giao hàng</option>
                                     </select>
 
                                 </div>
@@ -78,7 +81,11 @@ $option = $_GET['tinhtrang'];
                                 if (isset($_POST['save-order'])) {
                                     $tinhtrang = $_REQUEST['option'];
                                     $saveOrder->repair_order($id, $tinhtrang);
-                                    header('Location: thukhodh.php');
+                                    echo $tinhtrang;
+                                    // if($_SESSION['Quyen']=='1')
+                                    //     header('Location: order.php');
+                                    // if($_SESSION['Quyen']=='2')
+                                    //     header('Location: thukhodh.php');
                                 }
                                 ?>
                             </div>

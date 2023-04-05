@@ -1,5 +1,6 @@
 <?php
-ob_start();
+error_reporting(0);
+session_start();
 class sanpham
 {
 	function getOnly()
@@ -153,18 +154,13 @@ class sanpham
 	{
 		$a = new DateBase;
 		$con = $a->connnection();
-		$sql = "update sanpham set TrangThai='0' where MaSanPham='".$masp ."'";
+		$sql = "update sanpham set TrangThai='0' where MaSanPham='" . $masp . "'";
 		mysqli_query($con, $sql);
-		echo "<script>alert('Bạn đã xóa sản phẩm khỏi hệ thống');window.location='index.php';
+		if($_SESSION['Quyen']=='1')
+			echo "<script>alert('Bạn đã xóa sản phẩm khỏi hệ thống');window.location='index.php';
 				</script>";
-	}
-	function unlockSP($masp)
-	{
-		$a = new DateBase;
-		$con = $a->connnection();
-		$sql = "update sanpham set TrangThai='1' where MaSanPham='" . $masp . "'";
-		mysqli_query($con, $sql);
-		echo "<script>alert('Bạn khôi phục sản phẩm xóa thành công');window.location='index.php';
+		else if($_SESSION['Quyen']=='2')
+			echo "<script>alert('Bạn đã xóa sản phẩm khỏi hệ thống');window.location='thukhoindex.php';
 				</script>";
 	}
 	function changeSP($masp, $sanpham)
@@ -173,7 +169,11 @@ class sanpham
 		$con = $a->connnection();
 		$sql = "update sanpham set TenSanPham='" . $sanpham['TenSanPham'] . "',Gia='" . $sanpham['Gia'] . "',MoTa='" . $sanpham['MoTa'] . "',Anh='" . $sanpham['Anh'] . "' where MaSanPham='" . $masp . "'";
 		mysqli_query($con, $sql);
-		echo "<script>alert('Bạn đã thay đổi thông tin sản phẩm trên hệ thống');window.location='index.php';
+		if($_SESSION['Quyen']=='1')
+			echo "<script>alert('Bạn đã thay đổi thông tin sản phẩm trên hệ thống');window.location='index.php';
+				</script>";
+		else if($_SESSION['Quyen']=='2')
+			echo "<script>alert('Bạn đã thay đổi thông tin sản phẩm trên hệ thống');window.location='thukhoindex.php';
 				</script>";
 	}
 	function addSP($sanpham)
@@ -248,4 +248,11 @@ class sanpham
 		$query = 'update sanpham set SoLuong = (SELECT SoLuong from sanpham WHERE MaSanPham = ' . $maSanPham . ') + ' . $soLuongCong . ' WHERE MaSanPham = ' . $maSanPham . '';
 		mysqli_query($connect, $query);
 	}
+	// public function updateSoLuongSanPham($maSanPham, $soLuong)
+	// {
+	// 	$connect = new DateBase;
+	// 	$connect = $connect->connnection();
+	// 	$query = 'update sanpham set SoLuong = (SELECT SoLuong from sanpham WHERE MaSanPham = ' . $maSanPham . ') + ' . $soLuong . ' WHERE MaSanPham = ' . $maSanPham . '';
+	// 	mysqli_query($connect, $query);
+	// }
 }

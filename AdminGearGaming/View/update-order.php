@@ -32,7 +32,10 @@ $option = $_GET['tinhtrang'];
     ?>
 
     <?php
-    include('nav.php')
+    if($_SESSION['Quyen']=='1')
+        include('nav.php');
+    if($_SESSION['Quyen']=='2')
+        include('navthukho.php');
     ?>
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -49,16 +52,16 @@ $option = $_GET['tinhtrang'];
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <select name="option" class="form-control" id="inputState">
-                                        <option value="1" <?php
-                                                            if ($option == 1) {
-                                                                echo 'selected';
-                                                            }
-                                                            ?>>Đã xử lý</option>
                                         <option value="0" <?php
                                                             if ($option == 0) {
                                                                 echo 'selected';
                                                             }
                                                             ?>>Chưa xử lý</option>
+                                        <option value="1" <?php
+                                                            if ($option == 1) {
+                                                                echo 'selected';
+                                                            }
+                                                            ?>>Đã xử lý</option>
                                     </select>
 
                                 </div>

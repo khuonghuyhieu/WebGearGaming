@@ -126,9 +126,6 @@
 														<td>'.$spnb['SoLuong'].'</td>
 														<td>'.number_format($spnb['Gia'],0).'</td>
 														<td>
-															<div class="rf" style="display: flex; justify-content: space-around;">
-																<a href="index.php?MaSanPhamXoa='.$spnb['MaSanPham'].'"><i class="glyphicon glyphicon-repeat"></i></a>
-															</div>
 														</td>
 													</tr>';
 												}
@@ -145,15 +142,10 @@
 				</div>
 			</div>
 		</div>
-		 <?php
+		<?php
             $masanpham=$_GET['MaSanPham'];
-            $masanphamxoa=$_GET['MaSanPhamXoa'];
             if(isset($masanpham)){           
-                $p->lockSP($masanpham);
-            }
-            if(isset($masanphamxoa)){           
-                $p->unlockSP($masanphamxoa);
-            }
+                $p->lockSP($masanpham);            }
         ?>
 		<script src="../js/jquery-1.11.1.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>

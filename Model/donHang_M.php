@@ -62,5 +62,15 @@
             $row = mysqli_fetch_array($result);
             return $row['MaDonHang'];
         }
+        public function deleteDH($madonhang)
+        {
+            $my_conn = new DateBase;
+            $my_conn = $my_conn->connnection();
+            $sql_repair = "UPDATE donhang SET TinhTrang = 5 WHERE MaDonHang = '$madonhang'";
+            if (mysqli_query($my_conn, $sql_repair)) {
+                if($_SESSION['Quyen']=='0')
+                    echo "<script>alert('Xóa đơn hàng thành công !');window.location='history.php';</script>";            
+            }
+        }
     }
 ?>

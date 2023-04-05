@@ -7,12 +7,6 @@
 			$danhmuc=$p->getAll();
 			return $danhmuc;
 		}
-		function getAllNB(){
-			include ("../../Model/danhmuc.php");
-			$p=new danhmuc;
-			$danhmuc=$p->getAllNB();
-			return $danhmuc;
-		}
 		function danhmucID($madm){
 			include ("../../Model/danhmuc.php");
 			$p=new danhmuc;
@@ -22,10 +16,7 @@
 		function lockDM($madm){
 			$p=new danhmuc;
 			$p->lockDM($madm);
-		}
-		function unlockDM($madm){
-			$p=new danhmuc;
-			$p->unlockDM($madm);
+			header('location:category.php');
 		}
 		function updateDM($madm,$tendm){
 			$p=new danhmuc;

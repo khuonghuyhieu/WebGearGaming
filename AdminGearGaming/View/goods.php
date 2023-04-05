@@ -81,6 +81,7 @@ $goods = new phieuNhap_C;
                                                 <th data-field="date" data-sortable="true">Ngày thêm</th>
                                                 <th data-field="price" data-sortable="true">Tổng giá</th>
                                                 <th data-field="detail" data-sortable="true">Chi tiết</th>
+                                                <th data-field="print" data-sortable="true">In Phiếu</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,6 +116,13 @@ $goods = new phieuNhap_C;
                                                                 <button type="submit" name="submitDetailGoods" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
                                                             </form>
                                                         </td>
+                                                        <!-- In PDF -->
+                                                        <td>
+                                                            <div class="rf" style="display: flex; justify-content: space-around;">
+                                                                <a target="_blank" href="../pdf/inphieunhap.php?id_goods=<?= $list_goods['MaPN'] ?>" type="submit" name="submitRepair" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i></a>
+                                                            </div>
+                                                        </td>
+                                                        <!-- In PDF -->
                                                     </tr>
                                             <?php
                                                 }

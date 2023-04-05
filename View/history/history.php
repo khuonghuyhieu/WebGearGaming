@@ -67,8 +67,12 @@ $donHangController = new DonHang_C;
                             <form id="form" action="#" name="form" method="GET">
                                 <select name="luachon" class="custom-select" id="inputGroupSelect04">
                                     <option value="1">Choose...</option>
-                                    <option value="2">Đã xử lý</option>
-                                    <option value="3">Chưa xử lý</option>
+                                    <option value="2">Chưa xử lý</option>
+                                    <option value="3">Đã xử lý</option>
+                                    <option value="4">Đang giao hàng</option>
+                                    <option value="5">Đã giao hàng</option>
+                                    <option value="6">Hoàn thành</option>
+                                    <option value="7">Đã hủy</option>
                                 </select>
                                 <button class="btn" name="submit" type="Submit" style="margin-bottom: 4px; padding: 6px;border-radius: 10px;background: darkgrey;">Lọc</button>
                             </form>
@@ -85,13 +89,13 @@ $donHangController = new DonHang_C;
                                                 <th colspan="1" class="a-center"><span class="nobr">Tổng giá</span></th>
                                                 <th colspan="1" class="a-center"><span class="nobr">Tình trạng</span></th>
                                                 <th class="a-center " rowspan="1">Xem chi tiết</th>
+                                                <th class="a-center " rowspan="1">In</th>
+                                                <th class="a-center " rowspan="1">Tác vụ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             if (isset($_GET['luachon']) == 0 || $_GET['luachon'] == 1) {
-                                                // $arrDonHangCuaKhach = $donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']); //set cung
-                                                // print_r($arrDonHangCuaKhach);
                                                 foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
                                             ?>
                                                     <tr class="first odd">
@@ -101,34 +105,40 @@ $donHangController = new DonHang_C;
                                                         <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
                                                         <td class="a-center hidden-table"><span class="text-success">
                                                                 <?php
-                                                                if ($arrDonHangCuaKhach['TinhTrang'] == '1')
-                                                                    echo '<span style="color:green">Đã xử lý</span>';
-                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '0')
+                                                                if ($arrDonHangCuaKhach['TinhTrang'] == '0')
                                                                     echo '<span style="color:red">Chưa xử lý</span>';
+                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '1')
+                                                                    echo '<span style="color:green">Đã xử lý</span>';
+                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '2')
+                                                                    echo '<span style="color:yellow">Đan giao hàng</span>';
+                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '3')
+                                                                    echo '<span style="color:green">Đã giao hàng</span>';
+                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '4')
+                                                                    echo '<span style="color:yellow">Hoàn thành</span>';
+                                                                else if ($arrDonHangCuaKhach['TinhTrang'] == '5')
+                                                                    echo '<span style="color:red">Đã hủy</span>';
                                                                 ?></span></td>
                                                         <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                        <!-- In PDF -->
+                                                        <td class="a-center last">
+                                                            <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                        </td>
+                                                        <!-- In PDF -->
+                                                        <?php
+                                                        if ($arrDonHangCuaKhach['TinhTrang'] == '0'){
+                                                            ?>
+                                                            <td class="a-center last"><a href="history.php?MaDonHang=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="glyphicon glyphicon-trash" title="DeleteOrder"></a></td>
+                                                            <?php
+                                                        }else{
+                                                            ?>
+                                                            <td></td>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                     </tr>
                                                     <?php
                                                 }
                                             } else if ($_GET['luachon'] == 2) {
-                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
-                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '1') {
-                                                    ?>
-                                                        <tr class="first odd">
-                                                            <td>
-                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
-                                                            </td>
-                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
-                                                            <td class="a-center hidden-table"><span class="text-success">
-                                                                    <?php
-                                                                    echo '<span style="color:green">Đã xử lý</span>';
-                                                                    ?></span></td>
-                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                }
-                                            } else {
                                                 foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
                                                     if ($arrDonHangCuaKhach['TinhTrang'] == '0') {
                                                     ?>
@@ -142,6 +152,127 @@ $donHangController = new DonHang_C;
                                                                     echo '<span style="color:red">Chưa xử lý</span>';
                                                                     ?></span></td>
                                                             <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                    <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last"><a href="history.php?MaDonHang=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="glyphicon glyphicon-trash" title="DeleteOrder"></a></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['luachon'] == 3) {
+                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
+                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '1') {
+                                                    ?>
+                                                        <tr class="first odd">
+                                                            <td>
+                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
+                                                            </td>
+                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
+                                                            <td class="a-center hidden-table"><span class="text-success">
+                                                                    <?php
+                                                                    echo '<span style="color:green">Đã xử lý</span>';
+                                                                    ?></span></td>
+                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['luachon'] == 4) {
+                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
+                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '2') {
+                                                    ?>
+                                                        <tr class="first odd">
+                                                            <td>
+                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
+                                                            </td>
+                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
+                                                            <td class="a-center hidden-table"><span class="text-success">
+                                                                    <?php
+                                                                    echo '<span style="color:yellow">Đang giao hàng</span>';
+                                                                    ?></span></td>
+                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['luachon'] == 5) {
+                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
+                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '3') {
+                                                    ?>
+                                                        <tr class="first odd">
+                                                            <td>
+                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
+                                                            </td>
+                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
+                                                            <td class="a-center hidden-table"><span class="text-success">
+                                                                    <?php
+                                                                    echo '<span style="color:green">Đã giao hàng</span>';
+                                                                    ?></span></td>
+                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['luachon'] == 6) {
+                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
+                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '4') {
+                                                    ?>
+                                                        <tr class="first odd">
+                                                            <td>
+                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
+                                                            </td>
+                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
+                                                            <td class="a-center hidden-table"><span class="text-success">
+                                                                    <?php
+                                                                    echo '<span style="color:green">Đã hoàn thành</span>';
+                                                                    ?></span></td>
+                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else if ($_GET['luachon'] == 7) {
+                                                foreach ($donHangController->donHangTheoKhachHang($_SESSION['MaTaiKhoan']) as $arrDonHangCuaKhach) {
+                                                    if ($arrDonHangCuaKhach['TinhTrang'] == '5') {
+                                                    ?>
+                                                        <tr class="first odd">
+                                                            <td>
+                                                                <h2 class="product-name"> <?= $arrDonHangCuaKhach['NgayMua'] ?> </h2>
+                                                            </td>
+                                                            <td class="a-center hidden-table"><span class="cart-price"> <span class="price"> <?= number_format($arrDonHangCuaKhach['TongTien'], 0) . ' VNĐ' ?></span></span></td>
+                                                            <td class="a-center hidden-table"><span class="text-success">
+                                                                    <?php
+                                                                    echo '<span style="color:red">Đã hủy</span>';
+                                                                    ?></span></td>
+                                                            <td class="a-center last"><a href="detail_history.php?maHoaDon=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" class="button" title="Remove item">Chi Tiết</a></td>
+                                                            <!-- In PDF -->
+                                                            <td class="a-center last">
+                                                                <a class="button" target="_blank" href="../../AdminGearGaming/pdf/indonhang.php?id_order=<?= $arrDonHangCuaKhach['MaDonHang'] ?>" title="Remove item">IN</a>
+                                                            </td>
+                                                            <!-- In PDF -->
                                                         </tr>
                                             <?php
                                                     }
@@ -157,6 +288,12 @@ $donHangController = new DonHang_C;
                 </div>
             </div>
         </section>
+        <?php
+            $madonhang=$_GET['MaDonHang'];
+            if(isset($madonhang)){
+                $donHangController->deleteDH($madonhang);
+            }
+        ?>
 
         <?php
         include('../footer.php');

@@ -52,11 +52,6 @@ class sanpham_controller
         $p = new sanpham;
         $p->lockSP($masanpham);
     }
-    function unlockSP($masanpham)
-    {
-        $p = new sanpham;
-        $p->unlockSP($masanpham);
-    }
     function changeSP($masanpham, $sanpham)
     {
         $p = new sanpham;

@@ -60,7 +60,7 @@
                             <strong>Phương thức giao hàng: </strong>
                             <p>Giao tận nơi</p>
                             <strong>Phương thức thanh toán: </strong>
-                            <p>COD</p>
+                            <p>Chuyển khoản</p>
                         </div>
                     <?php
                 ?>

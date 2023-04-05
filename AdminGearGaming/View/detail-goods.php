@@ -6,6 +6,7 @@ include('../../Controller/sanpham.php');
 include('../../Model/connection.php');
 $detailGoods = new detailGoods_C;
 $products = new sanpham_controller;
+require_once('tcpdf/tcpdf.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,10 @@ $products = new sanpham_controller;
     ?>
 
     <?php
-    include('nav.php')
+    if($_SESSION['Quyen']=='1')
+        include('nav.php');
+    if($_SESSION['Quyen']=='2')
+        include('navthukho.php');
     ?>
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

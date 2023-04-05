@@ -51,7 +51,7 @@ $goods = new phieuNhap_C;
                             <div class="fixed-table-toolbar">
                                 <div class="btn pull-left">
                                     <form method="post">
-                                        <a class="btn btn-default" name="add-goods" href="insert-goodsthukho.php"><i class="glyphicon glyphicon-plus-sign" style="margin-top: 1px"></i> Thêm Phiếu Nhập</a>
+                                        <a class="btn btn-default" name="add-goods" href="insert-goods.php"><i class="glyphicon glyphicon-plus-sign" style="margin-top: 1px"></i> Thêm Phiếu Nhập</a>
                                         <button class="btn btn-default" type="submit" name="refresh" title="Refresh">
                                             <i class="glyphicon glyphicon-refresh icon-refresh"></i> Tải lại
                                         </button>
@@ -95,7 +95,7 @@ $goods = new phieuNhap_C;
                                                         <td><?= $list_search_goods['NgayNhap'] ?></td>
                                                         <td><?= number_format($list_search_goods['TongGia'], 0, ',', ',') ?></td>
                                                         <td>
-                                                            <form action="detail-goodsthukho.php?id_goods=<?= $list_search_goods['MaPN'] ?>" method="post">
+                                                            <form action="detail-goods.php?id_goods=<?= $list_search_goods['MaPN'] ?>" method="post">
                                                                 <button type="submit" name="submitDetailGoods" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
                                                             </form>
                                                         </td>
@@ -111,7 +111,7 @@ $goods = new phieuNhap_C;
                                                         <td><?= $list_goods['NgayNhap'] ?></td>
                                                         <td><?= number_format($list_goods['TongGia'], 0, ',', ',') ?></td>
                                                         <td>
-                                                            <form action="detail-goodsthukho.php?id_goods=<?= $list_goods['MaPN'] ?>" method="post">
+                                                            <form action="detail-goods.php?id_goods=<?= $list_goods['MaPN'] ?>" method="post">
                                                                 <button type="submit" name="submitDetailGoods" class="btn btn-secondary"><i class="glyphicon glyphicon-list-alt"></i> Xem chi tiết</button>
                                                             </form>
                                                         </td>

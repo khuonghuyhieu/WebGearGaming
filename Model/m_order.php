@@ -51,15 +51,13 @@ class order_m
         $my_conn = new DateBase;
         $my_conn = $my_conn->connnection();
         $sql_repair = "UPDATE donhang SET TinhTrang = '$tinhTrang' WHERE MaDonHang = '$orderID'";
-        if (mysqli_query($my_conn, $sql_repair)){
-            if($_SESSION['Quyen']=='1'){
-                echo "<script>alert('Thành công !');window.location='order.php';</script>";
-            }
-            else if($_SESSION['Quyen']=='2'){
-                echo "<script>alert('Thành công !');window.location='thukhodh.php';</script>";
-            }
+        if (mysqli_query($my_conn, $sql_repair)) {
+            if($_SESSION['Quyen']=='1')
+                echo "<script>alert('Cập nhật tình trạng đơn hàng thành công !');window.location='order.php';</script>";
+            if($_SESSION['Quyen']=='2')
+                echo "<script>alert('Cập nhật tình trạng đơn hàng thành công !');window.location='thukhodh.php';</script>";
         } else {
-            echo '<script>alert("Thất bại !")</script>';
+            echo '<script>alert("Cập nhật tình trạng đơn hàng thất bại !")</script>';
         }
     }
 
