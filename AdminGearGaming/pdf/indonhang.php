@@ -18,8 +18,14 @@
   $pdf->Write(10, 'Đơn Hàng');
   $pdf->Ln(10);
 
-  $width_cell=array(12,150,30,40,40);
+  $id = $_GET['id_order'];
+  foreach ($order->search_order($id) as $list_search) {
+    $pdf->Write(10, 'Khách hàng: ');
+    $pdf->Write(10, $list_search['HoTen']);
+  }
+  $pdf->Ln(10);
 
+  $width_cell=array(12,150,30,40,40);
   $pdf->Cell($width_cell[0],10,'STT',1,0,'C',true);
   $pdf->Cell($width_cell[1],10,'Tên sản phẩm',1,0,'C',true);
   $pdf->Cell($width_cell[2],10,'Số lượng',1,0,'C',true);
@@ -28,7 +34,6 @@
 
   $fill=false;
   $i=0;
-  $id = $_GET['id_order'];
   $tongTienHoaDon=0;
   foreach ($order->detail_order($id) as $list_detail) {
       $masp = $list_detail['MaSanPham'];
