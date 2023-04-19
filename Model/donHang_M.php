@@ -38,18 +38,20 @@
             $connect = new DateBase;
             $connect = $connect->connnection();
 
-            $query = "INSERT INTO donhang VALUE(" .
-            "''," .
-            "'" . $donHang[ 'NgayMua' ] . "'," .
-            "'" . $donHang[ 'TongTien' ] . "'," .
-            "'" . $donHang[ 'TinhTrang' ] . "'," .
-            "'" . $donHang[ 'HoTen' ] . "'," .
-            "'" . $donHang[ 'Email' ] . "'," .
-            "'" . $donHang[ 'Phone' ] . "'," .
-            "'" . $donHang[ 'DiaChi' ] . "'," .
-            "'" . $donHang[ 'TinhThanh' ] . "'," .
-            "'" . $donHang[ 'QuanHuyen' ] . "'," .
-            "'" . $donHang[ 'MaTaiKhoan' ] . "')";
+            // $query = "INSERT INTO donhang VALUE(" .
+            // "''," .
+            // "'" . $donHang[ 'NgayMua' ] . "'," .
+            // "'" . $donHang[ 'TongTien' ] . "'," .
+            // "'" . $donHang[ 'TinhTrang' ] . "'," .
+            // "'" . $donHang[ 'HoTen' ] . "'," .
+            // "'" . $donHang[ 'Email' ] . "'," .
+            // "'" . $donHang[ 'Phone' ] . "'," .
+            // "'" . $donHang[ 'DiaChi' ] . "'," .
+            // "'" . $donHang[ 'TinhThanh' ] . "'," .
+            // "'" . $donHang[ 'QuanHuyen' ] . "'," .
+            // "'" . $donHang[ 'MaTaiKhoan' ] . "')";
+            // $query = "CALL sp_create_donhang('".$donHang[ 'NgayMua' ]."', '".$donHang[ 'TongTien' ]."', '".$donHang[ 'TinhTrang' ]."', '".$donHang[ 'HoTen' ]."', '".$donHang[ 'Email' ]."', '".$donHang[ 'Phone' ]."', '".$donHang[ 'DiaChi' ]."', '".$donHang[ 'TinhThanh' ]."', '".$donHang[ 'QuanHuyen' ]."', '".$donHang[ 'MaTaiKhoan' ]."')";
+            $query = "CALL sp_create_donhang('".$donHang[ 'NgayMua' ]."', '".$donHang[ 'TinhTrang' ]."', '".$donHang[ 'HoTen' ]."', '".$donHang[ 'Email' ]."', '".$donHang[ 'Phone' ]."', '".$donHang[ 'DiaChi' ]."', '".$donHang[ 'TinhThanh' ]."', '".$donHang[ 'QuanHuyen' ]."', '".$donHang[ 'MaTaiKhoan' ]."')";
             mysqli_query($connect,$query);
         }
         public function maDonHangMoiNhat()

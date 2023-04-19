@@ -49,7 +49,8 @@ class sanpham
 	{
 		$a = new DateBase;
 		$con = $a->connnection();
-		$sql = "select * from sanpham where TenSanPham like '%" . $_REQUEST['search'] . "%' and TrangThai = 1";
+		// $sql = "select * from sanpham where TenSanPham like '%" . $_REQUEST['search'] . "%' and TrangThai = 1";
+		$sql = "CALL sp_search_sanpham_by_name('".$_REQUEST['search']."')";
 		$rs = mysqli_query($con, $sql);
 		$num = mysqli_num_rows($rs);
 		if ($num != 0) {
