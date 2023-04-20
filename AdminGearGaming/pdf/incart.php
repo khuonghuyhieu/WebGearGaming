@@ -18,13 +18,19 @@
   $pdf->Write(10, 'Đơn Hàng');
   $pdf->Ln(10);
 
-  $width_cell=array(12,150,30,40,40);
+  $nameAccoutnCurrent = $_SESSION['Holot'].' '.$_SESSION['Ten'].' ';
+  $pdf->Write(10, 'Tên Khách Hàng: ');
+  $pdf->Write(10, $nameAccoutnCurrent);
+  $pdf->Ln(10);
 
+  $width_cell=array(12,150,30,40,40);
   $pdf->Cell($width_cell[0],10,'STT',1,0,'C',true);
   $pdf->Cell($width_cell[1],10,'Tên sản phẩm',1,0,'C',true);
   $pdf->Cell($width_cell[2],10,'Số lượng',1,0,'C',true);
   $pdf->Cell($width_cell[3],10,'Đơn giá',1,0,'C',true);
   $pdf->Cell($width_cell[4],10,'Thành tiền',1,1,'C',true);
+
+
 
   $fill=false;
   $i=0;
@@ -38,7 +44,7 @@
       $pdf->Cell($width_cell[2],10,$item['Quantity'],1,0,'C',$fill);
       $pdf->Cell($width_cell[3],10,number_format($item['Price'], 0),1,0,'C',$fill);
       $pdf->Cell($width_cell[4],10,number_format($item['Price'] * $item['Quantity'], 0),1,1,'C',$fill);
-      $tongTienHoaDon+=$thanhTien;
+      $tongTienHoaDon+=$item['Price'] * $item['Quantity'];
       $fill=!$fill;
     }
   }
